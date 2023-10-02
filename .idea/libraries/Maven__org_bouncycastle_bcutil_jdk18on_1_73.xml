@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.bouncycastle:bcutil-jdk18on:1.73">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../apache-maven-3.9.1/Maven storage/org/bouncycastle/bcutil-jdk18on/1.73/bcutil-jdk18on-1.73.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../../apache-maven-3.9.1/Maven storage/org/bouncycastle/bcutil-jdk18on/1.73/bcutil-jdk18on-1.73-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../apache-maven-3.9.1/Maven storage/org/bouncycastle/bcutil-jdk18on/1.73/bcutil-jdk18on-1.73-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
