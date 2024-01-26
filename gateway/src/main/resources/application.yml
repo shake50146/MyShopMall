@@ -1,0 +1,34 @@
+server:
+  port: 8081
+
+eureka:
+  instance:
+    hostname: 127.0.0.1
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8080/eureka/
+
+springdoc:
+  api-docs:
+    path: /v3/swagger-ui.html
+    enabled: true
+  swagger-ui:
+    path: /v3/api-docs
+
+spring:
+  application:
+    name: shop-portal
+  main:
+    web-application-type: reactive
+  cloud:
+    gateway:
+      routes:
+        - id: shop-account
+          uri: lb://localhost:8083
+          predicates:
+            - Path=/user/**
+
+        - id: shop-authentication
+          uri: lb://localhost:8082
+          predicates:
+            - Path=/auth/**

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shake.account.mapper.TokenMapper">
+
+    <!-- Integer insertTokenByUsername(String username , String token); -->
+    <insert id="insertTokenByUsername">
+        insert into ums_token values((select acc_id from ums_account where username = #{username}) , #{token})
+    </insert>
+
+    <!--  String selectTokenByUsername(String username); -->
+    <select id="selectTokenByUsername" resultType="java.lang.String">
+        select t.token
+        from ums_token t
+        join ums_account a
+        on t.acc_id = a.acc_id
+        where a.username = #{username}
+    </select>
+
+    <!-- Integer updateTokenByUsername(String username , String token); -->
+    <update id="updateTokenByUsername">
+        update ums_token t
+        join ums_account a
+        on t.acc_id = a.acc_id
+            <set>
+                t.token = #{token}
+            </set>
+        where username = #{username}
+    </update>
+
+    <!-- Integer deleteTokenByAccId(Integer accId); -->
+    <delete id="deleteTokenByAccId">
+        delete from ums_token where acc_id = #{accId}
+    </delete>
+
+
+</mapper>

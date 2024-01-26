@@ -1,0 +1,52 @@
+server:
+  port: 8085
+
+eureka:
+  instance:
+    hostname: 127.0.0.1
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8080/eureka/
+
+#Set swagger api url
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/swagger-ui.html
+  swagger-ui:
+    path: /v3/api-docs
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        failure-rate-threshold: 50
+    instances:
+      order-breaker-1:
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 5000
+
+      order-breaker-2:
+        failure-rate-threshold: 20  #
+        sliding-window-size: 5
+        sliding-window-type: time_based
+        minimum-number-of-calls: 5
+        wait-duration-in-open-state: 30000
+        event-consumer-buffer-size: 5
+        permitted-number-of-calls-in-half-open-state: 2
+        record-exceptions:
+          - java.lang.Exception
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+spring:
+  application:
+    name: shop-order
+  datasource:
+    username: shopmall
+    password: 123456
+    url: jdbc:mysql://localhost:3306/billshopmall
+    driver-class-name: com.mysql.cj.jdbc.Driver

@@ -1,0 +1,89 @@
+server:
+  port: 8081
+
+eureka:
+  instance:
+    hostname: 127.0.0.1
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8080/eureka/
+
+#Set swagger api url
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/swagger-ui.html
+  swagger-ui:
+    path: /v3/api-docs
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        failure-rate-threshold: 50
+    instances:
+      portal-breaker-1:
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 5000
+
+      portal-breaker-2:
+        failure-rate-threshold: 20
+        sliding-window-size: 5
+        sliding-window-type: time_based
+        minimum-number-of-calls: 5
+        wait-duration-in-open-state: 30000
+        event-consumer-buffer-size: 5
+        permitted-number-of-calls-in-half-open-state: 2
+        record-exceptions:
+          - java.lang.Exception
+
+spring:
+  application:
+    name: shop-portal
+  data:
+    redis:
+      host: 192.168.93.128
+      password: 111111
+  #      cluster:
+#        max-redirects: 3
+#        nodes: 192.168.93.128:6379,192.168.93.128:6380,192.168.93.129:6381,192.168.93.129:6382,192.168.93.130:6383,192.168.93.130:6384
+
+  main:
+    web-application-type: reactive
+  cloud:
+    gateway:
+      default-filters:
+        - name: RequestRateLimiter
+          args:
+            deny-empty-key: false
+            redis-rate-limiter.replenishRate: 10
+            redis-rate-limiter.burstCapacity: 20
+            redis-rate-limiter.requestedTokens: 10
+            key-resolver: "#{@ipKeyResolver}"
+      routes:
+        - id: shop-authentication
+          uri: http://localhost:8082
+          predicates:
+            - Path=/auth/login , /auth/register , /valid/auth/**
+          filters:
+            - RewritePath=/valid/(?<segment>/?.*) , /$\{segment}
+
+
+        - id: shop-account
+          uri: http://localhost:8083
+          predicates:
+            - Path=/valid/user/** , /valid/admin/**
+          filters:
+            - RewritePath=/valid/(?<segment>/?.*) ,/$\{segment}
+
+
+        - id: shop-product
+          uri: http://localhost:8084
+          predicates:
+            - Path=/product/**
+
+        - id: shop-order
+          uri: http://localhost:8085
+          predicates:
+            - Path=/order/**
+
