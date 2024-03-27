@@ -23,6 +23,9 @@
 ![image](https://github.com/shake50146/MyShopMall/assets/141225648/7c2938c3-66d0-449d-906c-580c26f5ccef)
 
 - [會員服務一 : 獲取用戶/更新用戶/更新密碼/刪除用戶]
+![image](https://github.com/shake50146/MyShopMall/assets/141225648/2589fea3-c06f-418b-bfdc-63176c377761)
+![image](https://github.com/shake50146/MyShopMall/assets/141225648/48a347f7-a35b-423c-9cf5-a1df64f94011)
+
 - [會員服務二 : 管理員功能 - 獲取特定用戶/更新特定用戶/刪除特定用戶]
 - 陳列商品/分頁導覽
 - 購物車/訂單系統
