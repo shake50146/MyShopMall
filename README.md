@@ -15,7 +15,7 @@
 
 - [認證服務 : 註冊帳號/登入登出/刷新令牌/認證授權]
 ![image](https://github.com/shake50146/MyShopMall/assets/141225648/44dab689-6da9-40bc-b7c1-0457cd32dd5e)
-![image](https://github.com/shake50146/MyShopMall/assets/141225648/b20945ac-bc19-4ced-8682-2725fdea6dea)
+![image](https://github.com/shake50146/MyShopMall/assets/141225648/f1572d7a-f56c-4b9a-a326-5f33b9ba27cb)
 ![image](https://github.com/shake50146/MyShopMall/assets/141225648/088e9c77-3d4f-431c-88dc-fe5d339210a7)
 ![image](https://github.com/shake50146/MyShopMall/assets/141225648/ec4051c1-bac2-456f-bf1b-3acaf32b99bc)
 
